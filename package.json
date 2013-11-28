@@ -1,0 +1,23 @@
+{
+  "description": "Adds a ruler to the page so editors can indent lines.",
+  "name": "ep_page_ruler",
+  "version": "0.1.6",
+  "author": {
+    "name": "fourplusone",
+    "email": "info@fourplusone.de"
+  },
+  "contributors": [
+    {
+      "name": "John McLear",
+      "email": "john@mclear.co.uk"
+    }
+  ],
+  "dependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/johnmclear/ep_page_ruler.git"
+  }
+}

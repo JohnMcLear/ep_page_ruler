@@ -1,0 +1,40 @@
+<div id="ep_page_ruler" style="position:absolute;width:100%;background-color:#fff">
+  <div id="ep_page_inner">
+    <div class='rulerControl' id="ep_page_ruler_left">|&lt;</div>
+    <div class='rulerControl' id="ep_page_ruler_right">&gt;|</div>
+  </div>
+</div>
+
+<style type="text/css">
+.rulerControl{
+  position:absolute;
+}
+#ep_page_ruler_right{
+  float:right;
+}
+
+#ep_page_ruler{
+  top:60px;
+  height:15px;
+  z-index:9999;
+}
+#ep_page_inner{
+  height:100%;
+  background-color:lightgrey;
+  margin:auto;
+  padding-left:-4px;
+  position:relative;
+}
+
+@media all and (max-width: 400px){
+  #ep_page_ruler{
+    display:none;
+  } 
+  #editorcontainerbox{
+    top:0;
+  }
+}
+
+</style>
+
+<script src="../static/js/jquery.js"></script>
