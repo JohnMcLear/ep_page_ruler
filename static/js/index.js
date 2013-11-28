@@ -65,12 +65,12 @@ var aceDomLineProcessLineAttributes = function(name, context){
        formattedString += 'margin-left:' + rulerLeft[1] + 'px;'
     }
     if(rulerRight){ 
-      formattedString += 'padding-right:' +rulerRight[1] + 'px;'
+      formattedString += 'margin-right:' +rulerRight[1] + 'px;'
     }
   
     var modifier = {
-      preHtml: '<span style='+formattedString+'>',
-      postHtml: '</span>',
+      preHtml: '<div style='+formattedString+'>',
+      postHtml: '</div>',
       processedMarker: true
     };
     return [modifier];
