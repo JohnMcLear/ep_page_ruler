@@ -33,9 +33,16 @@ ruler.init = function(context){
 
   $('#ep_page_ruler_right_container').click(function(e){
     var pageOffset = $("#editorcontainer > iframe").offset().left || 0;
-    $('#ep_page_ruler_right').css("left", (e.clientX-$("#ep_page_ruler_right_container").offset().left) +"px");
+
+    // From the Left
+    var left = e.clientX-$("#ep_page_ruler_right_container").offset().left;
+    $('#ep_page_ruler_right').css("left", left + "px");
+
+    // From the right..  
+    var right = $('#ep_page_ruler_right_container').outerWidth() - left;
+    console.log(right);
     context.ace.callWithAce(function(ace){
-      ace.ace_doInsertRulerRight(e.clientX-$("#ep_page_ruler_right_container").offset().left);
+      ace.ace_doInsertRulerRight( right );
     },'insertRulerRight' , true);
   });
 
