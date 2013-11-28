@@ -9,7 +9,7 @@ var rulerClass = 'ruler';
 exports.postAceInit = function(hook, context){
   setTimeout(function(){
     ruler.init(context)
-  }, 200);
+  }, 400);
 };
 
 ruler.init = function(context){
