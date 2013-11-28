@@ -27,16 +27,29 @@ var postAceInit = function(hook, context){
   })
   */
   var pageWidth = $("#editorcontainer > iframe").outerWidth();
+  var pageOffset = $("#editorcontainer > iframe").offset().left;
   var innerWidth = $('iframe[name="ace_outer"]').contents().find('iframe').width();
   var margin = pageWidth - innerWidth;
+  var halfMargin = margin/2;
   $('#ep_page_inner').css("width", pageWidth +"px");
-  $('#ep_page_ruler_left').css("left", ((margin /2)-4) +"px");
-  $('#ep_page_ruler_right').css("right", ((margin /2)+4) +"px");
-  $('.rulerControl').click(function(){
-    alert("pow");
-  });
-};
+  $('#ep_page_ruler_left').css("left", (halfMargin-4) +"px");
+  $('#ep_page_ruler_right').css("right", (halfMargin+4) +"px");
 
+  $('#ep_page_ruler_left_container').click(function(e){
+    $('#ep_page_ruler_left').css("left", (e.screenX-pageOffset) +"px");
+  });
+  $('#ep_page_ruler_right_container').click(function(e){
+    $('#ep_page_ruler_right').css("left", (e.screenX-pageOffset) +"px");
+  });
+
+};
+/*
+function moveRuler(target, e){
+  var pageOffset = $("#editorcontainer > iframe").offset().left;
+  $(target).css("left", (e.screenX-pageOffset) +"px");
+  console.log(target, e);
+}
+*/
 // Our heading attribute will result in a heaading:h1... :h6 class
 function aceAttribsToClasses(hook, context){
   if(context.key == 'heading'){
