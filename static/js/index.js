@@ -1,4 +1,5 @@
 var _, $, jQuery;
+var ruler = {};
 
 var $ = require('ep_etherpad-lite/static/js/rjquery').$;
 var _ = require('ep_etherpad-lite/static/js/underscore');
@@ -26,23 +27,37 @@ var postAceInit = function(hook, context){
     }
   })
   */
+
+
+  setTimeout(function(){
+    ruler.init()
+  }, 200);
+
+
+};
+
+ruler.init = function(){
   var pageWidth = $("#editorcontainer > iframe").outerWidth();
-  var pageOffset = $("#editorcontainer > iframe").offset().left;
+  var pageOffset = $("#editorcontainer > iframe").offset().left || 0;
   var innerWidth = $('iframe[name="ace_outer"]').contents().find('iframe').width();
   var margin = pageWidth - innerWidth;
   var halfMargin = margin/2;
-  $('#ep_page_inner').css("width", pageWidth +"px");
-  $('#ep_page_ruler_left').css("left", (halfMargin-4) +"px");
-  $('#ep_page_ruler_right').css("right", (halfMargin+4) +"px");
+
+  $('#ep_page_inner').css("width", innerWidth +"px");
+  $('#ep_page_ruler_left').css("left", "0px");
+  $('#ep_page_ruler_right').css("left", $("#ep_page_ruler_right_container").width() +"px");
 
   $('#ep_page_ruler_left_container').click(function(e){
-    $('#ep_page_ruler_left').css("left", (e.screenX-pageOffset) +"px");
+    var pageOffset = $("#editorcontainer > iframe").offset().left || 0;
+    $('#ep_page_ruler_left').css("left", (e.clientX-pageOffset-114) +"px");
   });
   $('#ep_page_ruler_right_container').click(function(e){
-    $('#ep_page_ruler_right').css("left", (e.screenX-pageOffset) +"px");
+    var pageOffset = $("#editorcontainer > iframe").offset().left || 0;
+    $('#ep_page_ruler_right').css("left", (e.clientX-$("#ep_page_ruler_right_container").offset().left) +"px");
   });
+  $('.rulerControl').show();
+}
 
-};
 /*
 function moveRuler(target, e){
   var pageOffset = $("#editorcontainer > iframe").offset().left;
