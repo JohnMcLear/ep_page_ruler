@@ -8,16 +8,50 @@ var rulerClass = 'ruler';
 // Bind the event handler to the toolbar buttons
 exports.postAceInit = function(hook, context){
   setTimeout(function(){
-    ruler.init(context)
+    ruler.init(context);
+    $('#ep_page_ruler').hide();
   }, 400);
+
+  $('#options-pageruler').click(function(){
+    if($('#options-pageruler').is(':checked')) {
+      $('#ep_page_ruler').show();
+    } else {
+      $('#ep_page_ruler').hide();
+    }
+  });
 };
 
 exports.aceEditEvent = function(hook, call, info, rep, attr){
-  if(!(call.callstack.type == "handleClick") && !(call.callstack.type == "handleKeyEvent")) return false;
 
-  // the caret is in a new position..  Let's do some funky shit
-  var attrs = call.rep.apool.eachAttrib(function(a){
-  });
+  // If it's not a click or a key event and the text hasn't changed then do nothing
+  if(!(call.callstack.type == "handleClick") && !(call.callstack.type == "handleKeyEvent") && !(call.callstack.docTextChanged)){
+    return false;
+  }
+
+  // If it's our own event
+  if(call.callstack.type == "insertRulerLeft" || call.callstack.type == "insertRulerRight"){
+    return false;
+  }
+
+  setTimeout(function(){ // avoid race condition..
+    var startLine = call.rep.selStart[0]; // Get the line number
+
+    // Does this line number have a left margin?
+    startLine = startLine+1; // Lines in JS start at 1 for some bizarre reason
+    var div = $('iframe[name="ace_outer"]').contents().find('iframe[name="ace_inner"]').contents().find('div:nth-child('+startLine+')').find('div');
+    var marginLeft = $(div).css("margin-left");
+    var marginRight = $(div).css("margin-right");
+
+    if ( marginLeft ) {
+      marginLeft = parseInt(marginLeft.replace("px",""))+100; // 100 to accomodate for margin
+      $('#ep_page_ruler_left_container > .rulerControl').css("left", marginLeft +"px");
+    }
+    if ( marginRight ){
+      marginRight = parseInt(marginRight.replace("px",""));
+      marginRight = 325-marginRight; // 325 is half of page minus margins
+      $('#ep_page_ruler_right_container > .rulerControl').css("left", marginRight +"px");
+    }
+  },250);
 }
 
 ruler.init = function(context){
@@ -56,7 +90,6 @@ ruler.init = function(context){
 
     // From the right..  
     var right = $('#ep_page_ruler_right_container').outerWidth() - left - 100;
-    console.log(right);
     context.ace.callWithAce(function(ace){
       ace.ace_doInsertRulerRight( right );
     },'insertRulerRight' , true);
@@ -146,3 +179,4 @@ exports.aceInitialized = function(hook, context){
 // Export all hooks
 exports.aceDomLineProcessLineAttributes = aceDomLineProcessLineAttributes;
 exports.aceAttribsToClasses = aceAttribsToClasses;
+

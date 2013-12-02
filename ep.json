@@ -11,6 +11,7 @@
         "aceEditEvent": "ep_page_ruler/static/js/index"
       },
       "hooks": {
+        "eejsBlock_mySettings": "ep_page_ruler/index",
         "collectContentPre": "ep_page_ruler/static/js/shared",
         "collectContentPost": "ep_page_ruler/static/js/shared",
         "getLineHTMLForExport": "ep_page_ruler/index",

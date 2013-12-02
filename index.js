@@ -6,6 +6,11 @@ exports.eejsBlock_dd_view = function(hook_name, args, cb){
   return cb();
 }
 
+exports.eejsBlock_mySettings = function (hook_name, args, cb) {
+  args.content = args.content + eejs.require('ep_page_ruler/templates/page_ruler_entry.ejs');
+  return cb();
+}
+
 exports.eejsBlock_afterEditbar = function (hook_name, args, cb)
 {
   args.content = args.content + eejs.require('ep_page_ruler/templates/toolbar.ejs', {settings : false});
