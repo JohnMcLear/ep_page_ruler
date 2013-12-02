@@ -12,7 +12,9 @@
       "email": "john@mclear.co.uk"
     }
   ],
-  "dependencies": {},
+  "dependencies": { 
+    "ep_page_view" : "*"
+  },
   "engines": {
     "node": "*"
   },

@@ -12,27 +12,45 @@ exports.postAceInit = function(hook, context){
   }, 400);
 };
 
+exports.aceEditEvent = function(hook, call, info, rep, attr){
+  if(!(call.callstack.type == "handleClick") && !(call.callstack.type == "handleKeyEvent")) return false;
+
+  // the caret is in a new position..  Let's do some funky shit
+  console.log(call);
+  var attrs = call.rep.apool.eachAttrib(function(a){
+//    console.log(a)
+  });
+}
+
 ruler.init = function(context){
+  // we need page_view enabled to use this functionality..
+  $('#editorcontainer, iframe').addClass('page_view');
+
+  // lets get the values we need
   var pageWidth = $("#editorcontainer > iframe").outerWidth();
   var pageOffset = $("#editorcontainer > iframe").offset().left || 0;
   var innerWidth = $('iframe[name="ace_outer"]').contents().find('iframe').width();
   var margin = pageWidth - innerWidth;
   var halfMargin = margin/2;
 
+  // format the ruler
   $('#ep_page_inner').css("width", innerWidth +"px");
   $('#ep_page_ruler_left').css("left", "0px");
   $('#ep_page_ruler_right').css("left", $("#ep_page_ruler_right_container").width() +"px");
 
+  // click event for left side
   $('#ep_page_ruler_left_container').click(function(e){
-    var pageOffset = $("#editorcontainer > iframe").offset().left || 0;
-    $('#ep_page_ruler_left').css("left", (e.clientX-pageOffset-114) +"px");
+    var pageOffset = $('iframe[name="ace_outer"]').contents().find('iframe[name="ace_inner"]').offset().left;
+    $('#ep_page_ruler_left').css("left", (e.clientX-pageOffset-5) +"px");
     context.ace.callWithAce(function(ace){
-      ace.ace_doInsertRulerLeft(e.clientX-pageOffset-114);
+      var newLeft = e.clientX-pageOffset-105;
+      ace.ace_doInsertRulerLeft(newLeft);
     },'insertRulerLeft' , true);
   });
 
+  // click event for right side
   $('#ep_page_ruler_right_container').click(function(e){
-    var pageOffset = $("#editorcontainer > iframe").offset().left || 0;
+    var pageOffset = $('iframe[name="ace_outer"]').contents().find('iframe[name="ace_inner"]').offset().left;
 
     // From the Left
     var left = e.clientX-$("#ep_page_ruler_right_container").offset().left;
@@ -45,7 +63,8 @@ ruler.init = function(context){
       ace.ace_doInsertRulerRight( right );
     },'insertRulerRight' , true);
   });
-
+  
+  // Show the ruler
   $('.rulerControl').show();
 }
 
@@ -64,7 +83,7 @@ var aceDomLineProcessLineAttributes = function(name, context){
 
   var cls = context.cls;
   var domline = context.domline;
-  var rulerLeft = /(?:^| )rulerLeft:([A-Za-z0-9]*)/.exec(cls);
+  var rulerLeft = /(?:^| )rulerLeft:([A-Za-z0-9-_]*[A-Za-z0-9])/.exec(cls);
   var rulerRight = /(?:^| )rulerRight:([A-Za-z0-9]*)/.exec(cls);
   if(rulerLeft || rulerRight){
     var formattedString = "";
