@@ -16,9 +16,7 @@ exports.aceEditEvent = function(hook, call, info, rep, attr){
   if(!(call.callstack.type == "handleClick") && !(call.callstack.type == "handleKeyEvent")) return false;
 
   // the caret is in a new position..  Let's do some funky shit
-  console.log(call);
   var attrs = call.rep.apool.eachAttrib(function(a){
-//    console.log(a)
   });
 }
 
@@ -35,8 +33,7 @@ ruler.init = function(context){
 
   // format the ruler
   $('#ep_page_inner').css("width", innerWidth +"px");
-//  $('#ep_page_ruler_left').css("left", "0px");
-  $('#ep_page_ruler_right').css("left", $("#ep_page_ruler_right_container").width()-50 +"px");
+  $('#ep_page_ruler_right').css("left", $("#ep_page_ruler_right_container").width()-100 +"px");
 
   // click event for left side
   $('#ep_page_ruler_left_container').click(function(e){
@@ -58,7 +55,7 @@ ruler.init = function(context){
     $('#ep_page_ruler_right').css("left", left + "px");
 
     // From the right..  
-    var right = $('#ep_page_ruler_right_container').outerWidth() - left;
+    var right = $('#ep_page_ruler_right_container').outerWidth() - left - 100;
     console.log(right);
     context.ace.callWithAce(function(ace){
       ace.ace_doInsertRulerRight( right );
