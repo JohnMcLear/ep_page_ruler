@@ -1,10 +1,10 @@
 <div id="ep_page_ruler">
   <div id="ep_page_inner">
     <span id="ep_page_ruler_left_container">
-      <div class='rulerControl' id="ep_page_ruler_left">|&lt;</div>
+      <div class='rulerControl' id="ep_page_ruler_left">|</div>
     </span>
     <span id="ep_page_ruler_right_container">  
-      <div class='rulerControl' id="ep_page_ruler_right">&gt;|</div>
+      <div class='rulerControl' id="ep_page_ruler_right">|</div>
     </span>
   </div>
 </div>
@@ -15,12 +15,14 @@
   position:relative;
   height:100%;
   width:50%;
+  left:50px;
 }
 #ep_page_ruler_right_container{
   float:right;
   position:relative; 
   height:100%;
   width:50%;
+  right:50px;
 }
 #ep_page_ruler_right{
   margin-left:-9px;
@@ -29,9 +31,11 @@
   position:relative;
   cursor:pointer;
   width:10px;
-}
-.rulerControl{
   display:none;
+  background-color:#fff;
+  width:4px;
+  border:solid grey 1px;
+  opacity:0.4;
 }
 #ep_page_ruler{
   height:15px;

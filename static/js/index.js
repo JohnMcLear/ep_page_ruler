@@ -54,6 +54,7 @@ ruler.init = function(context){
 
     // From the Left
     var left = e.clientX-$("#ep_page_ruler_right_container").offset().left;
+    left = left+6;
     $('#ep_page_ruler_right').css("left", left + "px");
 
     // From the right..  
