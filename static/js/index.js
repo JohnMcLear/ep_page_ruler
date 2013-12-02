@@ -19,6 +19,13 @@ exports.postAceInit = function(hook, context){
       $('#ep_page_ruler').hide();
     }
   });
+  
+  $('#ep_page_inner').mousemove(function(e){
+    console.log("I wanna show a big vertical line at ", e.clientX);
+    $('#ep_page_ruler_vertical_line').show().css("left", e.clientX+"px");
+  }).mouseout(function(){
+    $('#ep_page_ruler_vertical_line').hide();
+  });;
 };
 
 exports.aceEditEvent = function(hook, call, info, rep, attr){
@@ -45,11 +52,15 @@ exports.aceEditEvent = function(hook, call, info, rep, attr){
     if ( marginLeft ) {
       marginLeft = parseInt(marginLeft.replace("px",""))+100; // 100 to accomodate for margin
       $('#ep_page_ruler_left_container > .rulerControl').css("left", marginLeft +"px");
+    }else{
+      $('#ep_page_ruler_left_container > .rulerControl').css("left", "100px");
     }
     if ( marginRight ){
       marginRight = parseInt(marginRight.replace("px",""));
       marginRight = 325-marginRight; // 325 is half of page minus margins
       $('#ep_page_ruler_right_container > .rulerControl').css("left", marginRight +"px");
+    }else{
+      $('#ep_page_ruler_right_container > .rulerControl').css("left", "325px");
     }
   },250);
 }
