@@ -35,8 +35,8 @@ ruler.init = function(context){
 
   // format the ruler
   $('#ep_page_inner').css("width", innerWidth +"px");
-  $('#ep_page_ruler_left').css("left", "0px");
-  $('#ep_page_ruler_right').css("left", $("#ep_page_ruler_right_container").width() +"px");
+//  $('#ep_page_ruler_left').css("left", "0px");
+  $('#ep_page_ruler_right').css("left", $("#ep_page_ruler_right_container").width()-50 +"px");
 
   // click event for left side
   $('#ep_page_ruler_left_container').click(function(e){
