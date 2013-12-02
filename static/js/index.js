@@ -21,7 +21,6 @@ exports.postAceInit = function(hook, context){
   });
   
   $('#ep_page_inner').mousemove(function(e){
-    console.log("I wanna show a big vertical line at ", e.clientX);
     $('#ep_page_ruler_vertical_line').show().css("left", e.clientX+"px");
   }).mouseout(function(){
     $('#ep_page_ruler_vertical_line').hide();
