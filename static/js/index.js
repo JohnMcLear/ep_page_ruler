@@ -49,7 +49,7 @@ exports.aceEditEvent = function(hook, call, info, rep, attr){
     var marginRight = $(div).css("margin-right");
 
     if ( marginLeft ) {
-      marginLeft = parseInt(marginLeft.replace("px",""))+100; // 100 to accomodate for margin
+      marginLeft = parseInt(marginLeft.replace("px",""))+99; // 100 to accomodate for margin
       $('#ep_page_ruler_left_container > .rulerControl').css("left", marginLeft +"px");
     }else{
       $('#ep_page_ruler_left_container > .rulerControl').css("left", "100px");
@@ -82,9 +82,9 @@ ruler.init = function(context){
   // click event for left side
   $('#ep_page_ruler_left_container').click(function(e){
     var pageOffset = $('iframe[name="ace_outer"]').contents().find('iframe[name="ace_inner"]').offset().left;
-    $('#ep_page_ruler_left').css("left", (e.clientX-pageOffset-5) +"px");
+    $('#ep_page_ruler_left').css("left", (e.clientX-pageOffset)-3 +"px");
     context.ace.callWithAce(function(ace){
-      var newLeft = e.clientX-pageOffset-105;
+      var newLeft = e.clientX-pageOffset-102;
       ace.ace_doInsertRulerLeft(newLeft);
     },'insertRulerLeft' , true);
   });
@@ -95,7 +95,7 @@ ruler.init = function(context){
 
     // From the Left
     var left = e.clientX-$("#ep_page_ruler_right_container").offset().left;
-    left = left+6;
+    left = left+4;
     $('#ep_page_ruler_right').css("left", left + "px");
 
     // From the right..  
