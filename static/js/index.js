@@ -9,8 +9,9 @@ var rulerClass = 'ruler';
 exports.postAceInit = function(hook, context){
   setTimeout(function(){
     ruler.init(context);
-    $('#ep_page_ruler').hide();
   }, 400);
+
+  $('#options-pageruler').attr("checked","checked");
 
   $('#options-pageruler').click(function(){
     if($('#options-pageruler').is(':checked')) {
