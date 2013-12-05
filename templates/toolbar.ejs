@@ -1,5 +1,11 @@
 <div id="ep_page_ruler">
   <div id="ep_page_inner">
+    <ul id="ep_page_ruler_numbers">
+      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+      <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+      <li></li><li></li><li></li><li></li><li></li>
+
+    </ul>
     <span id="ep_page_ruler_left_container">
       <div class='rulerControl' id="ep_page_ruler_left">|</div>
     </span>
@@ -11,6 +17,32 @@
 <div id="ep_page_ruler_vertical_line"></div>
 
 <style type="text/css">
+#ep_page_ruler_numbers{
+  position:absolute;
+  list-style-type:none;
+  margin:0;
+  padding:0;
+  counter-reset:distance -1;
+  white-space:nowrap;
+  width:850px;
+  overflow:hidden;
+}
+#ep_page_ruler_numbers > li{
+  display:inline-block;
+  width:1.09cm;
+  height:12px;
+  color:#666;
+  opacity:0.6;
+  counter-increment:distance;
+  margin-left:-4px;
+  margin-top:2px;
+  align:right;
+}
+
+#ep_page_ruler_numbers > li:before {
+  content: counter(distance);
+}
+
 #ep_page_ruler_vertical_line{
   width:1px;
   position:absolute;
@@ -66,6 +98,7 @@
   -ms-user-select: none;
   user-select: none;
   display:none;
+  background-color:#f7f7f7;
 }
 
 #ep_page_inner{
@@ -77,7 +110,7 @@
   box-shadow:0px 4px 5px 1px #ddd;
   background-color: #f7f7f7;
   background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.9) 50%);
-  background-size: 100px 100px;
+  background-size: 2cm 2cm;
   cursor:pointer;
 }
 
