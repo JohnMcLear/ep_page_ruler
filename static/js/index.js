@@ -5,6 +5,10 @@ var $ = require('ep_etherpad-lite/static/js/rjquery').$;
 var _ = require('ep_etherpad-lite/static/js/underscore');
 var rulerClass = 'ruler';
 
+exports.collectContentLineText = function(hook, context){
+  console.log("um", context);
+}
+
 // Bind the event handler to the toolbar buttons
 exports.postAceInit = function(hook, context){
   setTimeout(function(){
@@ -122,7 +126,7 @@ function aceAttribsToClasses(hook, context){
 
 // Here we convert the class ruler:h1 into a tag
 var aceDomLineProcessLineAttributes = function(name, context){
-
+  console.log("this 3", context);
   var cls = context.cls;
   var domline = context.domline;
   var rulerLeft = /(?:^| )rulerLeft:([A-Za-z0-9-_]*[A-Za-z0-9])/.exec(cls);
