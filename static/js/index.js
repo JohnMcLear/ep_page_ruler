@@ -126,7 +126,6 @@ function aceAttribsToClasses(hook, context){
 
 // Here we convert the class ruler:h1 into a tag
 var aceDomLineProcessLineAttributes = function(name, context){
-  console.log("this 3", context);
   var cls = context.cls;
   var domline = context.domline;
   var rulerLeft = /(?:^| )rulerLeft:([A-Za-z0-9-_]*[A-Za-z0-9])/.exec(cls);
