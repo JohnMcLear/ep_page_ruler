@@ -8,7 +8,7 @@
       "email": "john@mclear.co.uk"
     }
   ],
-  "dependencies": { 
+  "peerDependencies": { 
     "ep_page_view" : "*"
   },
   "engines": {
