@@ -46,9 +46,13 @@ function getInlineStyle(header) {
 exports.getLineHTMLForExport = function (hook, context) {
   var header = _analyzeLine(context.attribLine, context.apool);
   if (header) {
+    if (context.lineContent[0] === '*') {
+      context.lineContent = context.lineContent.substring(1);
+    }
     var inlineStyle = getInlineStyle(header);
-    return "<" + header + " style=\"" + inlineStyle + "\">" + context.text.substring(1) + "</" + header + ">";
+    context.lineContent =  "<" + header + " style=\"" + inlineStyle + "\">" + context.lineContent + "</" + header + ">";
   }
+  return true;
 }
 
 function _analyzeLine(alineAttrs, apool) {
