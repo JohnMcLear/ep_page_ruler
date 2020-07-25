@@ -1,15 +1,15 @@
 {
   "description": "Adds a ruler to the page so editors can indent lines.  Click Settings -> Page Ruler to see the ruler",
   "name": "ep_page_ruler",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": [
     {
       "name": "John McLear",
       "email": "john@mclear.co.uk"
     }
   ],
-  "peerDependencies": { 
-    "ep_page_view" : "*"
+  "peerDependencies": {
+    "ep_page_view": "*"
   },
   "engines": {
     "node": "*"
