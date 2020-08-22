@@ -1,7 +1,7 @@
 {
   "description": "Adds a ruler to the page so editors can indent lines.  Click Settings -> Page Ruler to see the ruler",
   "name": "ep_page_ruler",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "author": [
     {
       "name": "John McLear",
