@@ -17,5 +17,9 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/johnmclear/ep_page_ruler.git"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "http://etherpad.org/"
   }
 }
