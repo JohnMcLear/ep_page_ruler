@@ -24,7 +24,7 @@ exports.postAceInit = function(hook, context){
       $('#ep_page_ruler').hide();
     }
   });
-  
+
   $('#ep_page_inner').mousemove(function(e){
     $('#ep_page_ruler_vertical_line').show().css("left", e.clientX+"px");
   }).mouseout(function(){
@@ -45,6 +45,7 @@ exports.aceEditEvent = function(hook, call, info, rep, attr){
   }
 
   setTimeout(function(){ // avoid race condition..
+    if(!call || !call.rep || !call.rep.selStart) return;
     var startLine = call.rep.selStart[0]; // Get the line number
 
     // Does this line number have a left margin?
@@ -103,13 +104,13 @@ ruler.init = function(context){
     left = left+4;
     $('#ep_page_ruler_right').css("left", left + "px");
 
-    // From the right..  
+    // From the right..
     var right = $('#ep_page_ruler_right_container').outerWidth() - left - 100;
     context.ace.callWithAce(function(ace){
       ace.ace_doInsertRulerRight( right );
     },'insertRulerRight' , true);
   });
-  
+
   // Show the ruler
   $('.rulerControl').show();
 }
@@ -135,10 +136,10 @@ var aceDomLineProcessLineAttributes = function(name, context){
     if(rulerLeft){
        formattedString += 'margin-left:' + rulerLeft[1] + 'px;'
     }
-    if(rulerRight){ 
+    if(rulerRight){
       formattedString += 'margin-right:' +rulerRight[1] + 'px;'
     }
-  
+
     var modifier = {
       preHtml: '<div style='+formattedString+'>',
       postHtml: '</div>',
@@ -151,14 +152,14 @@ var aceDomLineProcessLineAttributes = function(name, context){
 };
 
 // Find out which lines are selected and assign them the ruler attribute.
-// Passing a level >= 0 will set a ruler on the selected lines, level < 0 
+// Passing a level >= 0 will set a ruler on the selected lines, level < 0
 // will remove it
 function doInsertRulerLeft(level){
   var rep = this.rep,
     documentAttributeManager = this.documentAttributeManager;
 
   var firstLine, lastLine;
-  
+
   firstLine = rep.selStart[0];
   lastLine = Math.max(firstLine, rep.selEnd[0] - ((rep.selEnd[1] === 0) ? 1 : 0));
   _(_.range(firstLine, lastLine + 1)).each(function(i){
@@ -174,7 +175,7 @@ function doInsertRulerRight(level){
     documentAttributeManager = this.documentAttributeManager;
 
   var firstLine, lastLine;
-  
+
   firstLine = rep.selStart[0];
   lastLine = Math.max(firstLine, rep.selEnd[0] - ((rep.selEnd[1] === 0) ? 1 : 0));
   _(_.range(firstLine, lastLine + 1)).each(function(i){
@@ -193,4 +194,3 @@ exports.aceInitialized = function(hook, context){
 // Export all hooks
 exports.aceDomLineProcessLineAttributes = aceDomLineProcessLineAttributes;
 exports.aceAttribsToClasses = aceAttribsToClasses;
-
